@@ -2,6 +2,8 @@
 
 callapp-lib 是一个 H5 唤起 APP 的解决方案，能够满足大部分唤起客户端的场景，也预留了扩展口，帮你实现一些定制化的功能。
 
+本项目fork自 https://github.com/suanmei/callapp-lib，修复了微信版本号判断异常
+
 如果你想了解一些唤端的原理知识，或者阅读下面的文档有不理解的名词，可以访问这篇博客 [H5唤起APP指南](https://suanmei.github.io/2018/08/23/h5_call_app/) 。
 
 如果你在使用 callapp-lib 的过程中，有好的想法或者发现了bug，提 Issue 就行，作者会及时跟进。
@@ -11,34 +13,34 @@ callapp-lib 是一个 H5 唤起 APP 的解决方案，能够满足大部分唤�
 Install with [npm](https://www.npmjs.com/):
 
 ``` sh
-$ npm install --save callapp-lib
+$ npm install --save callapp-lib2
 ```
 
 ## Usage
 
 ``` js
-const CallApp = require('callapp-lib');
+const CallApp = require('callapp-lib2');
 
 or
 
-import CallApp from 'callapp-lib';
+import CallApp from 'callapp-lib2';
 ```
 
 callapp-lib 同样支持 `script` 加载，你可以使用下面的 **cdn文件（地址在下面的示例中）**，也可以下载 `dist/index.umd.js` 到你的项目中，`index.umd.js` 会暴露一个全局变量 `CallApp` ，这个全局变量和上面 `commonjs` 导入的 `CallApp` 内容是一致的，使用方法也是一致的。
 
 ``` html
 <!-- 及时下载未压缩的最新版本 Js -->
-<script src="https://unpkg.com/callapp-lib"></script>
+<script src="https://unpkg.com/callapp-lib2"></script>
 
 or
 
-<!-- 具体某一版本，本例中是 2.1.5 ，下载速度较上面快一些，因为上面的地址会有 302 -->
-<script src="https://unpkg.com/callapp-lib@2.1.5/dist/index.umd.js"></script>
+<!-- 具体某一版本，本例中是 2.1.9 ，下载速度较上面快一些，因为上面的地址会有 302 -->
+<script src="https://unpkg.com/callapp-lib2@2.1.9/dist/index.umd.js"></script>
 
 or
 
 <!-- 这是压缩版本，文件体积会小 1/2 左右，下载速度最快，生产环境建议使用这个 -->
-<script src="https://unpkg.com/callapp-lib@2.1.5/dist/index.umd.min.js"></script>
+<script src="https://unpkg.com/callapp-lib2@2.1.9/dist/index.umd.min.js"></script>
 ```
 
 callapp-lib 中传递出来的是一个类，你需要将它实例化，然后才能去调用实例对象的方法。

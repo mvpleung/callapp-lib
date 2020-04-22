@@ -11,7 +11,7 @@ export function getIOSVersion() {
  */
 export function getWeChatVersion() {
   const version = navigator.appVersion.match(/micromessenger\/(\d+\.\d+\.\d+)/i);
-  return version[1];
+  return Number((version[1] || '').replace(/\./gm, ''));
 }
 
 /**

@@ -95,6 +95,7 @@ export function generateUniversalLink(config, options) {
  * @memberof CallApp
  */
 export function generateYingYongBao(config, options) {
+  if (!options.yingyongbao) return null;
   const url = generateScheme(config, options);
   // 支持 AppLink
   return `${options.yingyongbao}&android_schema=${encodeURIComponent(url)}`;

@@ -48,6 +48,7 @@ function getVisibilityChangeProperty() {
  * @param {string}} [uri] - 需要打开的地址
  */
 export function evokeByLocation(uri) {
+  if (!uri) return;
   window.top.location.href = uri;
 }
 
