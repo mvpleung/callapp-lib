@@ -11,7 +11,40 @@ export function getIOSVersion() {
  */
 export function getWeChatVersion() {
   const version = navigator.appVersion.match(/micromessenger\/(\d+\.\d+\.\d+)/i);
-  return Number((version[1] || '').replace(/\./gm, ''));
+  return version[1] || '';
+}
+
+/**
+ * 比较版本号
+ * @param {string} v1 当前版本号
+ * @param {string} v2 目标版本号
+ * @returns {number} 0: v1 === v2, 1: v1 > v2, -1: v1 < v2
+ */
+export function compareVersion(v1, v2) {
+  const ver1 = v1.split('.');
+  const ver2 = v2.split('.');
+  const len = Math.max(ver1.length, ver2.length);
+
+  while (ver1.length < len) {
+    ver1.push('0');
+  }
+  while (ver2.length < len) {
+    ver2.push('0');
+  }
+
+  for (let i = 0; i < len; i += 1) {
+    const num1 = parseInt(ver1[i], 10);
+    const num2 = parseInt(ver2[i], 10);
+
+    if (num1 > num2) {
+      return 1;
+    }
+    if (num1 < num2) {
+      return -1;
+    }
+  }
+
+  return 0;
 }
 
 /**

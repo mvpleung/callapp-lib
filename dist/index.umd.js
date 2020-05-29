@@ -463,7 +463,40 @@
 	 */
 	function getWeChatVersion() {
 	  var version = navigator.appVersion.match(/micromessenger\/(\d+\.\d+\.\d+)/i);
-	  return Number((version[1] || '').replace(/\./gm, ''));
+	  return version[1] || '';
+	}
+
+	/**
+	 * 比较版本号
+	 * @param {string} v1 当前版本号
+	 * @param {string} v2 目标版本号
+	 * @returns {number} 0: v1 === v2, 1: v1 > v2, -1: v1 < v2
+	 */
+	function compareVersion(v1, v2) {
+	  var ver1 = v1.split('.');
+	  var ver2 = v2.split('.');
+	  var len = Math.max(ver1.length, ver2.length);
+
+	  while (ver1.length < len) {
+	    ver1.push('0');
+	  }
+	  while (ver2.length < len) {
+	    ver2.push('0');
+	  }
+
+	  for (var i = 0; i < len; i += 1) {
+	    var num1 = parseInt(ver1[i], 10);
+	    var num2 = parseInt(ver2[i], 10);
+
+	    if (num1 > num2) {
+	      return 1;
+	    }
+	    if (num1 < num2) {
+	      return -1;
+	    }
+	  }
+
+	  return 0;
 	}
 
 	/**
@@ -880,7 +913,7 @@
 	        // 近期ios版本qq禁止了scheme和universalLink唤起app，安卓不受影响 - 18年12月23日
 	        // ios qq浏览器禁止了scheme和universalLink - 2019年5月1日
 	        // ios 微信自 7.0.5 版本放开了 Universal Link 的限制
-	        if (browser.isWechat && getWeChatVersion() < 705 || browser.isQQ || browser.isQQBrowser) {
+	        if (browser.isWechat && compareVersion(getWeChatVersion(), '7.0.5') >= 0 || browser.isQQ || browser.isQQBrowser) {
 	          evokeByLocation(appstore);
 	        } else if (getIOSVersion() < 9) {
 	          evokeByIFrame(schemeURL);
